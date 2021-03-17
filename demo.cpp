@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <SDL.h>
-#include <cstring>
+#include <string>
 using namespace std;
 
 const int SCREEN_WIDTH = 900;
@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
     abcd.x=0;
     abcd.y=0;
     abcd.w=120;
-    abcd.h=90;
+    abcd.h=80;
     SDL_RenderFillRect(renderer, &abcd);
     SDL_RenderPresent(renderer);
     moving(window,renderer,abcd);
@@ -45,45 +45,51 @@ void moving(SDL_Window* &window, SDL_Renderer* &renderer, SDL_Rect &abcd)
             else if(e.type == SDL_KEYDOWN){
                 switch(e.key.keysym.sym)
                 {
-                case SDLK_DOWN:	
-                    if(abcd.y+5<=SCREEN_HEIGHT){
-                        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-                        SDL_RenderClear(renderer);
-                        abcd.y+=5;
-                        SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-                        SDL_RenderFillRect(renderer, &abcd);
-                        SDL_RenderPresent(renderer);
+                case SDLK_DOWN:
+                    if(abcd.y+10+abcd.h<=SCREEN_HEIGHT){
+                        abcd.y+=10;
+
                     }
+                    else abcd.y=0;
+                    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+                    SDL_RenderClear(renderer);
+                    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+                    SDL_RenderFillRect(renderer, &abcd);
+                    SDL_RenderPresent(renderer);
                     break;
                 case SDLK_RIGHT:
-                    if(abcd.x+5<=SCREEN_WIDTH){
-                        abcd.x+=5;
-                        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-                        SDL_RenderClear(renderer);
-                        SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-                        SDL_RenderFillRect(renderer, &abcd);
-                        SDL_RenderPresent(renderer);
+                    if(abcd.x+10+abcd.w<=SCREEN_WIDTH){
+                        abcd.x+=10;
                     }
+                    else abcd.x=0;
+
+                    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+                    SDL_RenderClear(renderer);
+                    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+                    SDL_RenderFillRect(renderer, &abcd);
+                    SDL_RenderPresent(renderer);
                     break;
                 case SDLK_UP:
-                    if(abcd.y-5>=0){
-                        abcd.y-=5;
-                        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-                        SDL_RenderClear(renderer);
-                        SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-                        SDL_RenderFillRect(renderer, &abcd);
-                        SDL_RenderPresent(renderer);
+                    if(abcd.y-10>=0){
+                        abcd.y-=10;
                     }
+                    else abcd.y = SCREEN_HEIGHT - abcd.h;
+                    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+                    SDL_RenderClear(renderer);
+                    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+                    SDL_RenderFillRect(renderer, &abcd);
+                    SDL_RenderPresent(renderer);
                     break;
                 case SDLK_LEFT:
-                    if(abcd.x-5>=0){
-                        abcd.x-=5;
-                        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-                        SDL_RenderClear(renderer);
-                        SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
-                        SDL_RenderFillRect(renderer, &abcd);
-                        SDL_RenderPresent(renderer);
+                    if(abcd.x-10>=0){
+                        abcd.x-=10;
                     }
+                    else abcd.x = SCREEN_WIDTH - abcd.w;
+                    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+                    SDL_RenderClear(renderer);
+                    SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
+                    SDL_RenderFillRect(renderer, &abcd);
+                    SDL_RenderPresent(renderer);
                     break;
                 }
             }
@@ -131,6 +137,6 @@ void waitUntilKeyPressed()
         if ( SDL_WaitEvent(&e) != 0 &&
              (e.type == SDL_KEYDOWN || e.type == SDL_QUIT) )
             return;
-        SDL_Delay(100);
+        SDL_Delay(10);
     }
 }
