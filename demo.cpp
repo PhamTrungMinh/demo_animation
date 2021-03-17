@@ -1,7 +1,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <SDL.h>
-#include <string>
+#include <cstring>
 using namespace std;
 
 const int SCREEN_WIDTH = 900;
@@ -45,7 +45,7 @@ void moving(SDL_Window* &window, SDL_Renderer* &renderer, SDL_Rect &abcd)
             else if(e.type == SDL_KEYDOWN){
                 switch(e.key.keysym.sym)
                 {
-                case SDLK_DOWN:
+                case SDLK_DOWN:	
                     if(abcd.y+5<=SCREEN_HEIGHT){
                         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
                         SDL_RenderClear(renderer);
