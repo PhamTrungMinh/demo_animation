@@ -24,8 +24,8 @@ int main(int argc, char* argv[])
     SDL_Rect abcd;
     abcd.x=0;
     abcd.y=0;
-    abcd.w=90;
-    abcd.h=60;
+    abcd.w=120;
+    abcd.h=90;
     SDL_RenderFillRect(renderer, &abcd);
     SDL_RenderPresent(renderer);
     moving(window,renderer,abcd);
